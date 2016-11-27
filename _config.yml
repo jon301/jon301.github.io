@@ -36,6 +36,7 @@ exclude:
   - README.md
   - CNAME
   - node_modules
+  - vendor
 
 # Plugin settings
 gems:
