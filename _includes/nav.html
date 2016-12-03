@@ -1,19 +1,11 @@
 {% assign sorted_pages = site.pages | sort:"order" %}
-{% capture page_titles %}{% for page in sorted_pages %}{% if page.title %}{{ page.title }}{% unless forloop.last %},{% endunless %}{% endif %}{% endfor %}{% endcapture %}
-{% assign page_title_list = page_titles | split:',' | uniq %}
 
 <nav>
-  {% for item in (0...page_title_list.size) %}
-    {% capture page_title %}{{ page_title_list[item] }}{% endcapture %}
-
-    {% for page in sorted_pages %}
-      {% unless page.exclude %}
-        {% if page.title and page.title == page_title %}
-          <a class="page-link" href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
-          {% break %}
-        {% endif %}
-      {% endunless %}
-    {% endfor %}
-
+  {% for page in sorted_pages %}
+    {% unless page.exclude or page.url contains '/page/'%}
+      {% if page.title %}
+        <a class="page-link" href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
+      {% endif %}
+    {% endunless %}
   {% endfor %}
 </nav>
