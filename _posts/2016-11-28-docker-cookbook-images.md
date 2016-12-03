@@ -26,6 +26,8 @@ comments: true
 docker images
 ```
 
+Il est possible d'utiliser [dockviz tool](https://github.com/justone/dockviz){:target="_blank"} pour visualiser le contenu d'une image.
+
 #### Supprimer une image de la machine hôte
 
 ```bash

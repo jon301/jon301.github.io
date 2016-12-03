@@ -72,12 +72,12 @@ Shift ⇧ + Mouse Drag
 #### Redimensionner un layer en conservant son ratio
 
 1. Sélectionner le layer
-2. Shift ⇧ + Mouse Drag depuis l'une des 8 poignées du layer
+2. Shift ⇧ + Mouse Drag l'une des 8 poignées du layer
 
 #### Redimensionner un layer avec comme point d'origine le centre du layer
 
 1. Sélectionner le layer
-2. Option ⌥ + Mouse Drag depuis l'une des 8 poignées du layer
+2. Option ⌥ + Mouse Drag l'une des 8 poignées du layer
 
 #### Redimensionner un layer avec précision
 
