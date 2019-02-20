@@ -60,10 +60,11 @@ body {
     }
 
     .highlight {
+      padding: 2em;
+      margin-bottom: 2em;
       background: #eee;
 
       code {
-        padding: 1em;
         display: block;
         overflow: auto;
       }
