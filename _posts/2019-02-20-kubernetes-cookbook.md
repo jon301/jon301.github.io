@@ -26,6 +26,25 @@ The nodes communicate with the master using the Kubernetes API, which the master
 
 ### Comment ...
 
+- [Comment ...](#comment)
+  - [Afficher la version de Minikube](#afficher-la-version-de-minikube)
+  - [Lancer une VM contenant un cluster Kubernetes](#lancer-une-vm-contenant-un-cluster-kubernetes)
+  - [Ouvrir le dashboard Kubernetes dans un navigateur](#ouvrir-le-dashboard-kubernetes-dans-un-navigateur)
+  - [Afficher la version de kubectl](#afficher-la-version-de-kubectl)
+  - [Afficher la configuration de kubectl](#afficher-la-configuration-de-kubectl)
+  - [Afficher les informations du cluster Kubernetes](#afficher-les-informations-du-cluster-kubernetes)
+  - [Afficher les noeuds du cluster Kubernetes](#afficher-les-noeuds-du-cluster-kubernetes)
+  - [Créer un Deployment permettant d'exécuter son application dans un cluster Kubernetes](#cr%C3%A9er-un-deployment-permettant-dex%C3%A9cuter-son-application-dans-un-cluster-kubernetes)
+  - [Afficher les Déploiements](#afficher-les-d%C3%A9ploiements)
+  - [Afficher les Pods](#afficher-les-pods)
+  - [Créer Kubernetes Service (exposer le container d'un Pod à l'extérieur du cluster)](#cr%C3%A9er-kubernetes-service-exposer-le-container-dun-pod-%C3%A0-lext%C3%A9rieur-du-cluster)
+  - [Afficher les Kubernetes Services](#afficher-les-kubernetes-services)
+  - [Utiliser le Kubernetes Service via Minikube](#utiliser-le-kubernetes-service-via-minikube)
+  - [Afficher URL des services exposés par Minikube](#afficher-url-des-services-expos%C3%A9s-par-minikube)
+  - [Supprimer un Kubernetes Service](#supprimer-un-kubernetes-service)
+  - [Supprimer un Deployment](#supprimer-un-deployment)
+- [Références](#r%C3%A9f%C3%A9rences)
+
 #### Afficher la version de Minikube
 
 ```bash
