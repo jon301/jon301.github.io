@@ -122,6 +122,40 @@ kubectl get deployments
 kubectl get pods
 ```
 
+#### Exporter le nom du Pod dans une variable d'environnement
+
+```bash
+export POD_NAME=$(kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}')
+```
+
+#### Afficher les logs d'un Pod
+
+```bash
+kubectl logs <pod-name>
+kubectl logs $POD_NAME
+```
+
+#### Executer une commande directement dans un container d'un Pod
+
+```bash
+kubectl exec <pod-name> [-c <container-name>] <command>
+
+# afficher les variables d'environnement du container
+kubectl exec $POD_NAME env
+
+# lancer une session bash dans le container
+kubectl exec -ti $POD_NAME bash
+```
+
+Note: le nom du container peut être omis si il n'y a qu'un seul container dans le Pod
+
+#### Créer un serveur proxy entre localhost et le Kubernetes API Server
+
+```bash
+kubectl proxy
+```
+
+
 #### Créer Kubernetes Service (exposer le container d'un Pod à l'extérieur du cluster)
 
 Par défaut, un Pod n'est accessible que par son IP interne dans un cluster Kubernetes. Afin de rendre un container accessible à l'extérieur du réseau virtual Kubernetes, il faut exposer le Pod en tant que Kubernetes Service.
@@ -168,6 +202,20 @@ kubectl delete service hello-node-service
 ```bash
 kubectl delete deployment <deployment-name>
 kubectl delete deployment hello-node
+```
+
+#### Afficher les informations d'une ressource
+
+```bash
+kubectl describe <resource-name>
+kubectl describe all
+kubectl describe -h
+```
+
+Par exemple pour voir, entre autres, les containers	qu'il y a dans un Pod:
+
+```bash
+kubectl describe pods
 ```
 
 ### Références
