@@ -26,43 +26,64 @@ The nodes communicate with the master using the Kubernetes API, which the master
 
 ### Comment ...
 
-- [Afficher la version de Minikube](#afficher-la-version-de-minikube)
-- [Lancer une VM contenant un cluster Kubernetes](#lancer-une-vm-contenant-un-cluster-kubernetes)
-- [Ouvrir le dashboard Kubernetes dans un navigateur](#ouvrir-le-dashboard-kubernetes-dans-un-navigateur)
-- [Afficher la version de kubectl](#afficher-la-version-de-kubectl)
-- [Afficher la configuration de kubectl](#afficher-la-configuration-de-kubectl)
-- [Afficher les informations du cluster Kubernetes](#afficher-les-informations-du-cluster-kubernetes)
-- [Afficher les noeuds du cluster Kubernetes](#afficher-les-noeuds-du-cluster-kubernetes)
-- [Créer un Deployment permettant d'exécuter son application dans un cluster Kubernetes](#cr%C3%A9er-un-deployment-permettant-dex%C3%A9cuter-son-application-dans-un-cluster-kubernetes)
-- [Afficher les Déploiements](#afficher-les-d%C3%A9ploiements)
-- [Afficher les Pods](#afficher-les-pods)
-- [Créer Kubernetes Service (exposer le container d'un Pod à l'extérieur du cluster)](#cr%C3%A9er-kubernetes-service-exposer-le-container-dun-pod-%C3%A0-lext%C3%A9rieur-du-cluster)
-- [Afficher les Kubernetes Services](#afficher-les-kubernetes-services)
-- [Utiliser le Kubernetes Service via Minikube](#utiliser-le-kubernetes-service-via-minikube)
-- [Afficher URL des services exposés par Minikube](#afficher-url-des-services-expos%C3%A9s-par-minikube)
-- [Supprimer un Kubernetes Service](#supprimer-un-kubernetes-service)
-- [Supprimer un Deployment](#supprimer-un-deployment)
+- [Comment ...](#comment)
+	- [Créer un cluster](#cr%C3%A9er-un-cluster)
+		- [Afficher la version de Minikube](#afficher-la-version-de-minikube)
+		- [Lancer une VM contenant un cluster Kubernetes](#lancer-une-vm-contenant-un-cluster-kubernetes)
+		- [Ouvrir le dashboard Kubernetes dans un navigateur](#ouvrir-le-dashboard-kubernetes-dans-un-navigateur)
+		- [Afficher la version de kubectl](#afficher-la-version-de-kubectl)
+		- [Afficher la configuration de kubectl](#afficher-la-configuration-de-kubectl)
+		- [Afficher les informations du cluster Kubernetes](#afficher-les-informations-du-cluster-kubernetes)
+	- [Déployer une application](#d%C3%A9ployer-une-application)
+		- [Afficher les noeuds du cluster Kubernetes](#afficher-les-noeuds-du-cluster-kubernetes)
+		- [Créer un Deployment permettant d'exécuter son application dans un cluster Kubernetes](#cr%C3%A9er-un-deployment-permettant-dex%C3%A9cuter-son-application-dans-un-cluster-kubernetes)
+		- [Afficher les Déploiements](#afficher-les-d%C3%A9ploiements)
+		- [Créer un serveur proxy entre localhost et le Kubernetes API Server](#cr%C3%A9er-un-serveur-proxy-entre-localhost-et-le-kubernetes-api-server)
+	- [Explorer l'application](#explorer-lapplication)
+		- [Afficher les Pods](#afficher-les-pods)
+		- [Exporter le nom du Pod dans une variable d'environnement](#exporter-le-nom-du-pod-dans-une-variable-denvironnement)
+		- [Afficher les logs d'un Pod](#afficher-les-logs-dun-pod)
+		- [Afficher les informations d'une ressource](#afficher-les-informations-dune-ressource)
+		- [Executer une commande directement dans un container d'un Pod](#executer-une-commande-directement-dans-un-container-dun-pod)
+	- [Exposer l'application](#exposer-lapplication)
+		- [Créer un Service (exposer le container d'un Pod à l'extérieur du cluster via un Kubernetes Service)](#cr%C3%A9er-un-service-exposer-le-container-dun-pod-%C3%A0-lext%C3%A9rieur-du-cluster-via-un-kubernetes-service)
+		- [Exporter port exposé par le Service dans une variable d'environnement](#exporter-port-expos%C3%A9-par-le-service-dans-une-variable-denvironnement)
+		- [Ping une application exposée](#ping-une-application-expos%C3%A9e)
+		- [Afficher les Kubernetes Services](#afficher-les-kubernetes-services)
+		- [Utiliser le Kubernetes Service via Minikube](#utiliser-le-kubernetes-service-via-minikube)
+		- [Afficher URL des services exposés par Minikube](#afficher-url-des-services-expos%C3%A9s-par-minikube)
+		- [Afficher les ressources (e.g. Pods/Services/Deployments) ayant un label particulier](#afficher-les-ressources-eg-podsservicesdeployments-ayant-un-label-particulier)
+		- [Appliquer un label à une ressource](#appliquer-un-label-%C3%A0-une-ressource)
+	- [Scale l'application](#scale-lapplication)
+		- [Scaler up/down un Déploiement avec des Replicas](#scaler-updown-un-d%C3%A9ploiement-avec-des-replicas)
+	- [Nettoyer des ressources](#nettoyer-des-ressources)
+		- [Supprimer un Kubernetes Service](#supprimer-un-kubernetes-service)
+		- [Supprimer un Deployment](#supprimer-un-deployment)
+		- [Stopper la VM Minikube](#stopper-la-vm-minikube)
+		- [Supprimer la VM Minikube](#supprimer-la-vm-minikube)
 - [Références](#r%C3%A9f%C3%A9rences)
 
-#### Afficher la version de Minikube
+#### Créer un cluster
+
+##### Afficher la version de Minikube
 
 ```bash
 minikube version
 ```
 
-#### Lancer une VM contenant un cluster Kubernetes
+##### Lancer une VM contenant un cluster Kubernetes
 
 ```bash
 minikube start
 ```
 
-#### Ouvrir le dashboard Kubernetes dans un navigateur
+##### Ouvrir le dashboard Kubernetes dans un navigateur
 
 ```bash
 minikube dashboard
 ```
 
-#### Afficher la version de kubectl
+##### Afficher la version de kubectl
 
 ```bash
 $ kubectl version
@@ -72,13 +93,13 @@ Server Version: version.Info{Major:"1", Minor:"13", GitVersion:"v1.13.3", GitCom
 
 `kubectl` est un CLI permettant d'interagir avec le cluster Kubernetes via Kubernetes API.
 
-#### Afficher la configuration de kubectl
+##### Afficher la configuration de kubectl
 
 ```bash
 kubectl config view
 ```
 
-#### Afficher les informations du cluster Kubernetes
+##### Afficher les informations du cluster Kubernetes
 
 ```bash
 $ kubectl cluster-info
@@ -86,7 +107,11 @@ Kubernetes master is running at https://192.168.99.100:8443
 KubeDNS is running at https://192.168.99.100:8443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
 ```
 
-#### Afficher les noeuds du cluster Kubernetes
+
+
+#### Déployer une application
+
+##### Afficher les noeuds du cluster Kubernetes
 
 ```bash
 $ kubectl get nodes
@@ -97,7 +122,7 @@ minikube   Ready     master    5m        v1.13.3
 Cette commande affiche tous les noeuds pouvant être utilisés pour héberger nos applications.
 Le statut `Ready` indique que notre noeud est prêt à accepter des déploiements.
 
-#### Créer un Deployment permettant d'exécuter son application dans un cluster Kubernetes
+##### Créer un Deployment permettant d'exécuter son application dans un cluster Kubernetes
 
 Afin de créer un Deployment, il faut spécifier l'image du container de notre application et le nombre de Replicas à exécuter.
 Le nombre de Replicas peut être modifié par la suite.
@@ -108,15 +133,27 @@ Un Kubernetes Deployment vérifie la santé du Pod et redémarre le container du
 ```bash
 kubectl create deploy <deployment-name> --image=<image-name>
 kubectl create deploy hello-node --image=gcr.io/hello-minikube-zero-install/hello-node
+
+# possibilité d'utiliser la commande `run` pour créer un déploiement
+kubectl run kubernetes-bootcamp --image=gcr.io/google-samples/kubernetes-bootcamp:v1 --port=8080
 ```
 
-#### Afficher les Déploiements
+##### Afficher les Déploiements
 
 ```bash
 kubectl get deployments
 ```
 
-#### Afficher les Pods
+##### Créer un serveur proxy entre localhost et le Kubernetes API Server
+
+```bash
+kubectl proxy
+```
+
+
+#### Explorer l'application
+
+##### Afficher les Pods
 
 ```bash
 kubectl get pods
@@ -125,20 +162,34 @@ kubectl get pods
 kubectl get pods -o wide
 ```
 
-#### Exporter le nom du Pod dans une variable d'environnement
+##### Exporter le nom du Pod dans une variable d'environnement
 
 ```bash
 export POD_NAME=$(kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}')
 ```
 
-#### Afficher les logs d'un Pod
+##### Afficher les logs d'un Pod
 
 ```bash
 kubectl logs <pod-name>
 kubectl logs $POD_NAME
 ```
 
-#### Executer une commande directement dans un container d'un Pod
+##### Afficher les informations d'une ressource
+
+```bash
+kubectl describe <resource-name>
+kubectl describe all
+kubectl describe -h
+```
+
+Par exemple pour voir, entre autres, les containers	qu'il y a dans un Pod:
+
+```bash
+kubectl describe pods
+```
+
+##### Executer une commande directement dans un container d'un Pod
 
 ```bash
 kubectl exec <pod-name> [-c <container-name>] <command>
@@ -155,14 +206,9 @@ kubectl exec -ti $POD_NAME curl localhost:8080
 
 Note: le nom du container peut être omis si il n'y a qu'un seul container dans le Pod
 
-#### Créer un serveur proxy entre localhost et le Kubernetes API Server
+#### Exposer l'application
 
-```bash
-kubectl proxy
-```
-
-
-#### Créer un Service (exposer le container d'un Pod à l'extérieur du cluster via un Kubernetes Service)
+##### Créer un Service (exposer le container d'un Pod à l'extérieur du cluster via un Kubernetes Service)
 
 Par défaut, un Pod n'est accessible que par son IP interne dans un cluster Kubernetes. Afin de rendre un container accessible à l'extérieur du réseau virtual Kubernetes, il faut exposer le Pod via un Kubernetes Service.
 
@@ -182,71 +228,39 @@ Le nom du service est optionnel. Il prendra le nom du déploiement par défaut s
 - LoadBalancer - Creates an external load balancer in the current cloud (if supported) and assigns a fixed, external IP to the Service. Superset of NodePort.
 - ExternalName - Exposes the Service using an arbitrary name (specified by externalName in the spec) by returning a CNAME record with the name. No proxy is used. This type requires v1.7 or higher of kube-dns.
 
-#### Exporter port exposé par le Service dans une variable d'environnement
+##### Exporter port exposé par le Service dans une variable d'environnement
 
 ```bash
 export NODE_PORT=$(kubectl get services/kubernetes-bootcamp -o go-template='{{(index .spec.ports 0).nodePort}}')
 echo NODE_PORT=$NODE_PORT
 ```
 
-#### Ping une application exposée
+##### Ping une application exposée
 
 ```bash
 curl $(minikube ip):$NODE_PORT
 ```
 
-#### Afficher les Kubernetes Services
+##### Afficher les Kubernetes Services
 
 ```bash
 kubectl get services
 ```
 
-#### Utiliser le Kubernetes Service via Minikube
+##### Utiliser le Kubernetes Service via Minikube
 
 ```bash
 minikube service <service-name>
 minikube service hello-node-service
 ```
 
-#### Afficher URL des services exposés par Minikube
+##### Afficher URL des services exposés par Minikube
 
 ```bash
 minikube service list
 ```
 
-#### Supprimer un Kubernetes Service
-
-```bash
-kubectl delete service <service-name>
-kubectl delete service hello-node-service
-
-# utilisation des labels
-kubectl delete service -l <service-label>
-kubectl delete service -l run=kubernetes-bootcamp
-```
-
-#### Supprimer un Deployment
-
-```bash
-kubectl delete deployment <deployment-name>
-kubectl delete deployment hello-node
-```
-
-#### Afficher les informations d'une ressource
-
-```bash
-kubectl describe <resource-name>
-kubectl describe all
-kubectl describe -h
-```
-
-Par exemple pour voir, entre autres, les containers	qu'il y a dans un Pod:
-
-```bash
-kubectl describe pods
-```
-
-#### Afficher les ressources (e.g. Pods/Services/Deployments) ayant un label particulier
+##### Afficher les ressources (e.g. Pods/Services/Deployments) ayant un label particulier
 
 ```bash
 # voir les labels des ressources
@@ -257,15 +271,16 @@ kubectl get pods -l <label-name>
 kubectl get pods -l run=kubernetes-bootcamp
 ```
 
-#### Appliquer un label à une ressource
-
+##### Appliquer un label à une ressource
 
 ```bash
 kubectl label <resource-type> <resource-name> <label>
 kubectl label pod $POD_NAME app=v1
 ```
 
-#### Scaler up/down un Déploiement avec des Replicas
+#### Scale l'application
+
+##### Scaler up/down un Déploiement avec des Replicas
 
 ```bash
 kubectl scale <deployment-name> --replicas=<count>
@@ -277,6 +292,38 @@ En effectuant plusieurs ping successifs de l'application, on constate que désor
 ```bash
 curl $(minikube ip):$NODE_PORT
 ```
+
+#### Nettoyer des ressources
+
+##### Supprimer un Kubernetes Service
+
+```bash
+kubectl delete service <service-name>
+kubectl delete service hello-node-service
+
+# utilisation des labels
+kubectl delete service -l <service-label>
+kubectl delete service -l run=kubernetes-bootcamp
+```
+
+##### Supprimer un Deployment
+
+```bash
+kubectl delete deployment <deployment-name>
+kubectl delete deployment hello-node
+```
+
+##### Stopper la VM Minikube
+
+````bash
+minikube stop
+````
+
+##### Supprimer la VM Minikube
+
+````bash
+minikube delete
+````
 
 ### Références
 - [https://kubernetes.io/docs/tutorials/kubernetes-basics/](https://kubernetes.io/docs/tutorials/kubernetes-basics/){:target="_blank"}
