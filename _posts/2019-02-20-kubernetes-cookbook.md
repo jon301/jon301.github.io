@@ -120,6 +120,9 @@ kubectl get deployments
 
 ```bash
 kubectl get pods
+
+# voir + d'informations, comme par exemple le nom du noeud dans lequel le Pod a été crée
+kubectl get pods -o wide
 ```
 
 #### Exporter le nom du Pod dans une variable d'environnement
@@ -178,6 +181,19 @@ Le nom du service est optionnel. Il prendra le nom du déploiement par défaut s
 - NodePort - Exposes the Service on the same port of each selected Node in the cluster using NAT. Makes a Service accessible from outside the cluster using <NodeIP>:<NodePort>. Superset of ClusterIP.
 - LoadBalancer - Creates an external load balancer in the current cloud (if supported) and assigns a fixed, external IP to the Service. Superset of NodePort.
 - ExternalName - Exposes the Service using an arbitrary name (specified by externalName in the spec) by returning a CNAME record with the name. No proxy is used. This type requires v1.7 or higher of kube-dns.
+
+#### Exporter port exposé par le Service dans une variable d'environnement
+
+```bash
+export NODE_PORT=$(kubectl get services/kubernetes-bootcamp -o go-template='{{(index .spec.ports 0).nodePort}}')
+echo NODE_PORT=$NODE_PORT
+```
+
+#### Ping une application exposée
+
+```bash
+curl $(minikube ip):$NODE_PORT
+```
 
 #### Afficher les Kubernetes Services
 
@@ -247,6 +263,19 @@ kubectl get pods -l run=kubernetes-bootcamp
 ```bash
 kubectl label <resource-type> <resource-name> <label>
 kubectl label pod $POD_NAME app=v1
+```
+
+#### Scaler up/down un Déploiement avec des Replicas
+
+```bash
+kubectl scale <deployment-name> --replicas=<count>
+kubectl scale deployments/kubernetes-bootcamp --replicas=4
+```
+
+Ajouter des Replicas provoque la création automatique du même nombre de Pods.
+En effectuant plusieurs ping successifs de l'application, on constate que désormais différents Pods répondent aux appels.
+```bash
+curl $(minikube ip):$NODE_PORT
 ```
 
 ### Références
