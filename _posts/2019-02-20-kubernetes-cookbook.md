@@ -293,6 +293,43 @@ En effectuant plusieurs ping successifs de l'application, on constate que désor
 curl $(minikube ip):$NODE_PORT
 ```
 
+#### Update l'application (Rolling Update)
+
+##### Spécifier une nouvelle image au niveau du Deployment
+
+```bash
+kubectl set image <deployment-name> <container-name>=<image-name>
+kubectl set image deployments/kubernetes-bootcamp kubernetes-bootcamp=jocatalin/kubernetes-bootcamp:v2
+```
+
+##### Vérifier le statut du rollout
+
+```bash
+# vérifier que l'app fonctionne toujours
+curl $(minikube ip):$NODE_PORT
+
+
+kubectl rollout status <deployment-name>
+kubectl rollout status deployments/kubernetes-bootcamp
+```
+
+##### Rollback un déploimeent à la version précédente de l'image
+
+```bash
+# vérifier le statut du déploiement
+kubectl get deployments
+
+# vérifier le statut des pods
+kubectl get pods
+
+# voir les logs du pod contenant des erreurs
+kubectl describe pods <pod-name>
+
+# rollback
+kubectl rollout undo <deployment-name>
+kubectl rollout undo deployments/kubernetes-bootcamp
+```
+
 #### Nettoyer des ressources
 
 ##### Supprimer un Kubernetes Service
