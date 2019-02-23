@@ -140,11 +140,14 @@ kubectl logs $POD_NAME
 ```bash
 kubectl exec <pod-name> [-c <container-name>] <command>
 
-# afficher les variables d'environnement du container
+# afficher les variables d'environnement du container du Pod
 kubectl exec $POD_NAME env
 
 # lancer une session bash dans le container
 kubectl exec -ti $POD_NAME bash
+
+# vérifier qu'une app est bien exécutée dans le container
+kubectl exec -ti $POD_NAME curl localhost:8080
 ```
 
 Note: le nom du container peut être omis si il n'y a qu'un seul container dans le Pod
@@ -156,9 +159,9 @@ kubectl proxy
 ```
 
 
-#### Créer Kubernetes Service (exposer le container d'un Pod à l'extérieur du cluster)
+#### Créer un Service (exposer le container d'un Pod à l'extérieur du cluster via un Kubernetes Service)
 
-Par défaut, un Pod n'est accessible que par son IP interne dans un cluster Kubernetes. Afin de rendre un container accessible à l'extérieur du réseau virtual Kubernetes, il faut exposer le Pod en tant que Kubernetes Service.
+Par défaut, un Pod n'est accessible que par son IP interne dans un cluster Kubernetes. Afin de rendre un container accessible à l'extérieur du réseau virtual Kubernetes, il faut exposer le Pod via un Kubernetes Service.
 
 ```bash
 kubectl expose deployment <deployment-name> --type=LoadBalancer --port=8080 --name=<service-name>
@@ -170,6 +173,11 @@ kubectl expose --help
 
 Le flag `--type=LoadBalancer` indique qu'on souhaite exposer le service à l'extérieur du cluster.
 Le nom du service est optionnel. Il prendra le nom du déploiement par défaut si non renseigné.
+
+- ClusterIP (default) - Exposes the Service on an internal IP in the cluster. This type makes the Service only reachable from within the cluster.
+- NodePort - Exposes the Service on the same port of each selected Node in the cluster using NAT. Makes a Service accessible from outside the cluster using <NodeIP>:<NodePort>. Superset of ClusterIP.
+- LoadBalancer - Creates an external load balancer in the current cloud (if supported) and assigns a fixed, external IP to the Service. Superset of NodePort.
+- ExternalName - Exposes the Service using an arbitrary name (specified by externalName in the spec) by returning a CNAME record with the name. No proxy is used. This type requires v1.7 or higher of kube-dns.
 
 #### Afficher les Kubernetes Services
 
@@ -195,6 +203,10 @@ minikube service list
 ```bash
 kubectl delete service <service-name>
 kubectl delete service hello-node-service
+
+# utilisation des labels
+kubectl delete service -l <service-label>
+kubectl delete service -l run=kubernetes-bootcamp
 ```
 
 #### Supprimer un Deployment
@@ -218,6 +230,26 @@ Par exemple pour voir, entre autres, les containers	qu'il y a dans un Pod:
 kubectl describe pods
 ```
 
+#### Afficher les ressources (e.g. Pods/Services/Deployments) ayant un label particulier
+
+```bash
+# voir les labels des ressources
+kubectl describe pods
+
+# listing
+kubectl get pods -l <label-name>
+kubectl get pods -l run=kubernetes-bootcamp
+```
+
+#### Appliquer un label à une ressource
+
+
+```bash
+kubectl label <resource-type> <resource-name> <label>
+kubectl label pod $POD_NAME app=v1
+```
+
 ### Références
 - [https://kubernetes.io/docs/tutorials/kubernetes-basics/](https://kubernetes.io/docs/tutorials/kubernetes-basics/){:target="_blank"}
 - [https://kubernetes.io/docs/reference/kubectl/overview/](kubectl overview){:target="_blank"}
+- [https://kubernetes.io/docs/tutorials/kubernetes-basics/expose/expose-intro/#services-and-labels](https://kubernetes.io/docs/tutorials/kubernetes-basics/expose/expose-intro/#services-and-labels)
