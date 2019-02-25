@@ -3,7 +3,6 @@ layout: post
 title: "Kubernetes Cookbook"
 date: "2019-02-20 12:35"
 categories:
-    - docker
     - kubernetes
 tags:
     - devops
@@ -328,6 +327,19 @@ kubectl describe pods <pod-name>
 # rollback
 kubectl rollout undo <deployment-name>
 kubectl rollout undo deployments/kubernetes-bootcamp
+```
+
+#### Gérer les secrets
+
+```bash
+# create
+kubectl create secret generic mysql-pass --from-literal=password=YOUR_PASSWORD
+
+# get
+kubectl get secrets
+
+# delete
+kubectl delete secret <secret-name>
 ```
 
 #### Nettoyer des ressources
