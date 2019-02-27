@@ -382,6 +382,12 @@ minikube delete
 eval $(minikube docker-env)
 ```
 
+##### Configurer le daemon Docker pour qu'il utilise le host par défaut
+
+```bash
+eval $(docker-machine env -u)
+```
+
 ### Références
 - [https://kubernetes.io/docs/tutorials/kubernetes-basics/](https://kubernetes.io/docs/tutorials/kubernetes-basics/){:target="_blank"}
 - [https://kubernetes.io/docs/reference/kubectl/overview/](kubectl overview){:target="_blank"}
