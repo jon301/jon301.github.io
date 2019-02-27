@@ -374,6 +374,14 @@ minikube stop
 minikube delete
 ````
 
+#### Divers
+
+##### Configurer le daemon Docker pour qu'il utiliser le host de Minikube
+
+```bash
+eval $(minikube docker-env)
+```
+
 ### Références
 - [https://kubernetes.io/docs/tutorials/kubernetes-basics/](https://kubernetes.io/docs/tutorials/kubernetes-basics/){:target="_blank"}
 - [https://kubernetes.io/docs/reference/kubectl/overview/](kubectl overview){:target="_blank"}
