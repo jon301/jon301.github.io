@@ -374,6 +374,35 @@ minikube stop
 minikube delete
 ````
 
+#### Contextes
+
+##### Afficher le contexte courant
+
+```bash
+kubectl config current-context
+```
+
+##### Lister les contextes disponibles
+
+```bash
+kubectl config get-contexts
+
+# or
+kubectl config view -o jsonpath='{.contexts[*].name}'
+```
+
+##### Changer de contexte
+
+```bash
+kubectl config use-context <context-name>
+```
+
+##### Supprimer un contexte
+
+```bash
+kubectl config delete-context <context-name>
+```
+
 #### Divers
 
 ##### Configurer le daemon Docker pour qu'il utiliser le host de Minikube
@@ -392,3 +421,4 @@ eval $(docker-machine env -u)
 - [https://kubernetes.io/docs/tutorials/kubernetes-basics/](https://kubernetes.io/docs/tutorials/kubernetes-basics/){:target="_blank"}
 - [https://kubernetes.io/docs/reference/kubectl/overview/](kubectl overview){:target="_blank"}
 - [https://kubernetes.io/docs/tutorials/kubernetes-basics/expose/expose-intro/#services-and-labels](https://kubernetes.io/docs/tutorials/kubernetes-basics/expose/expose-intro/#services-and-labels)
+- [https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands)
